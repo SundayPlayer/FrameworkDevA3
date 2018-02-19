@@ -1,8 +1,8 @@
 <?php
 
-#namespace FrameworkDevA3\Template;
+namespace FrameworkDevA3\Template;
 
-class template
+class Template
 {
     /** @var string template path */
     protected $filepath;
