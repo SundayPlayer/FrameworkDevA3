@@ -7,8 +7,12 @@
   },
   "autoload": {
     "psr-4": {
-      "FrameworkDevA3": "src/"
+      "FrameworkDevA3\\": "src/"
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "cs-check": "phpcs --standard=PSR2 --colors -p ./src",
+    "cs-fix": "phpcbf --standard=PSR2 --colors ./src"
+  }
 }
