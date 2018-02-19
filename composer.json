@@ -1,0 +1,9 @@
+{
+    "name": "deva3/framework",
+    "description": "Framework de test en PHP",
+    "type": "project",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.2"
+    },
+    "license": "MIT"
+}
