@@ -50,7 +50,11 @@ class Template
     public function getContent()
     {
         $this->filecontent = file_get_contents($this->filepath);
-        $content = preg_replace('#{{ *([0-9a-z_\.\-]+) *}}#i', '<?php echo $this->getValue(\'$1\'); ?>', $this->filecontent);
+        $content = preg_replace(
+            '#{{ *([0-9a-z_\.\-]+) *}}#i',
+            '<?php echo $this->getValue(\'$1\'); ?>',
+            $this->filecontent
+        );
 
         return $content;
     }
