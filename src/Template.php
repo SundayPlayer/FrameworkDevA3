@@ -1,5 +1,7 @@
 <?php
 
+namespace FrameworkDevA3\Template;
+
 class Template
 {
     /** @var string template path */
@@ -19,10 +21,9 @@ class Template
 
     public function render($vars = [], $view = null)
     {
-        if($view != null){
+        if ($view != null) {
             $tmpl = new Template($view);
-        }
-        else {
+        } else {
             $tmpl = new Template($this->layoutfile);
         }
         $tmpl->setVars($vars);
@@ -30,9 +31,10 @@ class Template
         return $tmpl->output();
     }
 
-    public function output(){
+    public function output()
+    {
         ob_start();
-        eval('?>' . $this->get_content());
+        eval('?>' . $this->getContent());
         return ob_get_clean();
     }
 
@@ -45,15 +47,16 @@ class Template
         return $this;
     }
 
-    public function get_content(){
+    public function getContent()
+    {
         $this->filecontent = file_get_contents($this->filepath);
-        $content = preg_replace('#{{ *([0-9a-z_\.\-]+) *}}#i', '<?php echo $this->get_value(\'$1\'); ?>',$this->filecontent);
+        $content = preg_replace('#{{ *([0-9a-z_\.\-]+) *}}#i', '<?php echo $this->getValue(\'$1\'); ?>', $this->filecontent);
 
         return $content;
     }
 
-    public function get_value($key){
+    public function getValue($key)
+    {
         return $this->data[$key];
     }
-
 }
