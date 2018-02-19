@@ -6,7 +6,7 @@ class Table
 {
     private $name;
 
-    private $entity;
+    private $entities;
 
     /**
      * @return string
@@ -25,18 +25,18 @@ class Table
     }
 
     /**
-     * @return Entity
+     * @return Entity[]
      */
-    public function getEntity()
+    public function getEntities()
     {
-        return $this->entity;
+        return $this->entities;
     }
 
     /**
-     * @param Entity $entity
+     * @param Entity[] $entities
      */
-    public function setEntity($entity)
+    public function setEntities($entities)
     {
-        $this->entity = $entity;
+        $this->entities = $entities;
     }
 }
