@@ -9,6 +9,7 @@
 class ModelEntity extends Model
 {
     protected $data;
+
     /**
      * ModelEntity constructor.
      */
@@ -18,16 +19,13 @@ class ModelEntity extends Model
 
     public function validate()
     {
-
     }
 
-    public function save()
+    public function save($data)
     {
-
     }
 
-    public function delete()
+    public function delete($data)
     {
-
     }
 }
