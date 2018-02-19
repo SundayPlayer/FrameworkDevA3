@@ -1,3 +1,4 @@
+<?php
 class Router {
 
     private $url; // contiendra l'URL sur laquelle on veut aller
