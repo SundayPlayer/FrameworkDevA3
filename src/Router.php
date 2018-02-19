@@ -9,7 +9,6 @@ class Router {
 
     public function __construct($url){
         $this->url = $url;
-        echo $this->url;
     }
 
     // Permet l'ajout d'une route basique, à partir d'un URL et d'une fonction ou d'un controller à appeler.
