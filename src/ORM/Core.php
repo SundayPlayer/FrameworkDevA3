@@ -8,14 +8,14 @@ class Core
 {
     private $db;
 
-    private static $_instance;
+    private static $instance;
 
     public static function db()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new Core();
+        if (is_null(self::$instance)) {
+            self::$instance = new Core();
         }
-        return self::$_instance->db;
+        return self::$instance->db;
     }
 
     private function __construct()
