@@ -17,9 +17,14 @@ class Template
         $this->filepath = $filepath;
     }
 
-    public function render($vars = [])
+    public function render($vars = [], $view = null)
     {
-        $tmpl = new Template($this->layoutfile);
+        if($view != null){
+            $tmpl = new Template($view);
+        }
+        else {
+            $tmpl = new Template($this->layoutfile);
+        }
         $tmpl->setVars($vars);
 
         return $tmpl->output();
@@ -50,6 +55,5 @@ class Template
     public function get_value($key){
         return $this->data[$key];
     }
-
 
 }
