@@ -1,16 +1,16 @@
 <?php
 
-namespace FrameworkDevA3\Template;
+#namespace FrameworkDevA3\Template;
 
-class Template
+class template
 {
     /** @var string template path */
     protected $filepath;
     /** @var string template content */
     protected $filecontent;
     /** @var string layout file */
-    protected $layoutfile = __DIR__ . '/../default.php';
-    /** @var string Contenu */
+    public static $layoutfile = __dir__ . '/../default.php';
+    /** @var string contenu */
     protected $data = [];
 
     /** Constructeur */
@@ -19,12 +19,12 @@ class Template
         $this->filepath = $filepath;
     }
 
-    public function render($vars = [], $view = null)
+    public static function render($vars = [], $view = null)
     {
         if ($view != null) {
             $tmpl = new Template($view);
         } else {
-            $tmpl = new Template($this->layoutfile);
+            $tmpl = new Template(template::$layoutfile);
         }
         $tmpl->setVars($vars);
 
