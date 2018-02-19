@@ -5,6 +5,7 @@ class Router {
 
     public function __construct($url){
         $this->url = $url;
+        echo $this->url;
     }
 
 
