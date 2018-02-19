@@ -7,9 +7,13 @@ class Router {
     private $url; // contiendra l'URL sur laquelle on veut aller
     private $routes = [];
 
+    // CONSTRUCTEUR
+
     public function __construct($url){
         $this->url = $url;
     }
+
+    // FONCTIONS
 
     // Permet l'ajout d'une route basique, à partir d'un URL et d'une fonction ou d'un controller à appeler.
     // Retourne la route prête.
