@@ -10,5 +10,13 @@
       "FrameworkDevA3": "src/"
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "check": [
+      "@cs-check",
+      "@test"
+    ],
+    "cs-check": "phpcs --colors -p ./src ./tests",
+    "cs-fix": "phpcbf --colors ./src ./tests",
+  }
 }
