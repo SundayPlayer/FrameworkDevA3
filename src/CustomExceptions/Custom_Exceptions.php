@@ -12,8 +12,5 @@ class Custom_Exceptions extends Exception {
 	protected function traceDescription() {
 		return $this->message."<br>"."Dans le fichier: \"".$this->getFile()."\"<br> A la ligne: ".$this->getLine();;
 	}
-
-	//todo creation  d'une alerte box
-	//todo création d'un template
 }
 
