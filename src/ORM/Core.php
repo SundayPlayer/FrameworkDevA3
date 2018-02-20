@@ -20,7 +20,7 @@ class Core
 
     private function __construct()
     {
-        $conf = include __DIR__ . '/../../app/config.php';
+        $conf = include __DIR__ . '../../app/config.php';
 
         $this->db = new PDO(
             'mysql:host=' . $conf['ORM']['database']['host']

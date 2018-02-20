@@ -2,8 +2,12 @@
 
 namespace FrameworkDevA3\ORM;
 
+use FrameworkDevA3\ORM\Traits\TableTrait;
+
 class Table
 {
+    use TableTrait;
+
     private $name;
 
     private $entities;
