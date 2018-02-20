@@ -12,7 +12,7 @@ class ModelTable extends Model
     {
     }
 
-    public function select()
+    public function select($data)
     {
     }
 }

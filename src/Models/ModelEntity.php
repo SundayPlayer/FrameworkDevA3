@@ -17,11 +17,11 @@ class ModelEntity extends Model
     {
     }
 
-    public function save()
+    public function save($data)
     {
     }
 
-    public function delete()
+    public function delete($data)
     {
     }
 }

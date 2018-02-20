@@ -24,8 +24,8 @@ class Core
 
         $this->db = new PDO(
             'mysql:host=' . $conf['ORM']['database']['host']
-                . ';port=' . $conf['ORM']['database']['port']
-                . ';dbname=' . $conf['ORM']['database']['name'],
+            . ';port=' . $conf['ORM']['database']['port']
+            . ';dbname=' . $conf['ORM']['database']['name'],
             $conf['ORM']['database']['username'],
             $conf['ORM']['database']['password']
         );
