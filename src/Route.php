@@ -13,6 +13,9 @@ class Route
     {
         $this->path = trim($path, '/');
         $this->function = $function;
+        if($controllerDirectory !== ""){
+            $controllerDirectory = $controllerDirectory."/";
+        }
         $this->controllerDirectory = $controllerDirectory;
     }
 
