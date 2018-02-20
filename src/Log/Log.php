@@ -11,16 +11,32 @@ class Log
     public static function log()
     {
         $time = date("D, d M Y H:i:s");
-        $time = "[" . $time . "] <br>";
+        $time = "[" . $time . "] \n";
         $file = __DIR__."/fichier.log";
 
         $fileLog = fopen($file, "a+");
         fwrite($fileLog, $time);
 
         foreach (debug_backtrace() as $temp) {
-            $event = "File : " . $temp['file'] . " | Line : " . $temp['line'] . " | Function : " . $temp['function'] . "<br><br>";
+            $event = "File : " . $temp['file'] . " | Line : "
+                . $temp['line'] . " | Function : " . $temp['function'] ."\n\n";
             fwrite($fileLog, $event);
         }
+        fclose($fileLog);
+    }
+
+    public static function addLog($message, $line, $file)
+    {
+        $time = date("D, d M Y H:i:s");
+        $time = "[" . $time . "] \n";
+        $file = __DIR__."/fichier.log";
+
+        $fileLog = fopen($file, "a+");
+        fwrite($fileLog, $time);
+        $event = "Message : " . $message . " | File : " . $file . " | Line : "
+            . $line . "\n\n";
+
+        fwrite($fileLog, $event);
         fclose($fileLog);
     }
 }
