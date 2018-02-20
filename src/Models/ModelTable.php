@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David C
- * Date: 19/02/2018
- * Time: 14:22
- */
+
+namespace FrameworkDevA3\Model;
 
 class ModelTable extends Model
 {
@@ -18,6 +14,5 @@ class ModelTable extends Model
 
     public function select()
     {
-
     }
 }

@@ -1,5 +1,8 @@
 <?php
 
-class Model {
+namespace FrameworkDevA3\Model;
+
+class Model
+{
 
 }

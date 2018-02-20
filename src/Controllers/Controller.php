@@ -1,7 +1,9 @@
 <?php
 
-class Controller{
+namespace FrameworkDevA3\Controller;
 
+class Controller
+{
 
 
 }
