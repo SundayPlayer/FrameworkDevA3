@@ -1,6 +1,6 @@
 <?php
 
-namespace vTraits;
+namespace FrameworkDevA3\ORM\Traits;
 
 use FrameworkDevA3\ORM\Core;
 
