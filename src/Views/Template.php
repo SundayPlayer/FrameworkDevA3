@@ -1,6 +1,6 @@
 <?php
 
-namespace FrameworkDevA3\Template;
+//namespace FrameworkDevA3\Template;
 
 class Template
 {
@@ -61,6 +61,9 @@ class Template
 
     public function getValue($key)
     {
+        if(!isset($this->data[$key])){
+            $this->data[$key] = "";
+        }
         return $this->data[$key];
     }
 }
