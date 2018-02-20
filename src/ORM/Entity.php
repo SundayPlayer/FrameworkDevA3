@@ -3,8 +3,6 @@
 namespace FrameworkDevA3\ORM;
 
 use ArrayIterator;
-use FrameworkDevA3\ORM\Core;
-use FrameworkDevA3\ORM\Traits\EntityTrait;
 
 class Entity
 {
