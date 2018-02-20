@@ -25,42 +25,41 @@ class Entity
     }
 
 
-    public function create()
+    public function save()
     {
-        $db = Core::db();
-        $data = new ArrayIterator($this->data);
+        if (!isset($this->id)) {
+            $db = Core::db();
+            $data = new ArrayIterator($this->data);
 
-        $values="";
-        foreach ($data as $key => $value) {
-            $values.=$value;
-            if ($data->hasNext()) {
-                $values.=", ";
+            $values = "";
+            foreach ($data as $key => $value) {
+                $values .= $value;
+                if ($data->hasNext()) {
+                    $values .= ", ";
+                }
             }
-        }
-        $query = $db->query("INSERT INTO ".$this->name." VALUES (".$values.")");
-        $query->fetch();
-    }
+            $query = $db->query("INSERT INTO " . $this->name . " VALUES (" . $values . ")");
+            $query->fetch();
+        } else {
+            $db = Core::db();
+            $data = new ArrayIterator($this->data);
 
-    public function update()
-    {
-        $db = Core::db();
-        $data = new ArrayIterator($this->data);
-
-        $values="";
-        foreach ($data as $key => $value) {
-            $values.=$key." = ".$value;
-            if ($data->hasNext()) {
-                $values.=", ";
+            $values = "";
+            foreach ($data as $key => $value) {
+                $values .= $key . " = " . $value;
+                if ($data->hasNext()) {
+                    $values .= ", ";
+                }
             }
+            $query = $db->query("UPDATE " . $this->name . "SET " . $data . " WHERE id=" . $this->id);
+            $query->fetch();
         }
-        $query = $db->query("UPDATE ".$this->name."SET ".$data." WHERE id=".$this->id);
-        $query->fetch();
     }
 
     public function delete()
     {
         $db = Core::db();
-        $query = $db->query("DELETE FROM ". $this->name." WHERE id=".$this->id);
+        $query = $db->query("DELETE FROM " . $this->name . " WHERE id=" . $this->id);
         $query->fetch();
     }
 }
