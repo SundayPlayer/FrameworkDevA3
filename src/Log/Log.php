@@ -4,6 +4,9 @@ namespace FrameworkDevA3\Log;
 
 class Log
 {
+    private static $file = "../LogFiles/fichier.log";
+
+
     private function __construct()
     {
     }
@@ -12,9 +15,8 @@ class Log
     {
         $time = date("D, d M Y H:i:s");
         $time = "[" . $time . "] \n";
-        $file = __DIR__."/fichier.log";
 
-        $fileLog = fopen($file, "a+");
+        $fileLog = fopen(self::$file, "a+");
         fwrite($fileLog, $time);
 
         foreach (debug_backtrace() as $temp) {
@@ -29,9 +31,8 @@ class Log
     {
         $time = date("D, d M Y H:i:s");
         $time = "[" . $time . "] \n";
-        $file = __DIR__."/fichier.log";
 
-        $fileLog = fopen($file, "a+");
+        $fileLog = fopen(self::$file, "a+");
         fwrite($fileLog, $time);
         $event = "Message : " . $message . " | File : " . $file . " | Line : "
             . $line . "\n\n";
