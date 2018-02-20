@@ -2,7 +2,6 @@
 
 namespace FrameworkDevA3\ORM;
 
-use FrameworkDevA3\ORM\Traits\TableTrait;
 use FrameworkDevA3\Utility\Str;
 
 class Table
