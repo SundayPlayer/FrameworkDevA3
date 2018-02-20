@@ -5,9 +5,9 @@
  * Date: 19/02/2018
  * Time: 16:06
  */
-namespace FrameworkDevA3\CustomExceptions;
+namespace FrameworkDevA3\CustomException;
 
-class RouterException extends CustomExceptions
+class RouterException extends CustomException
 {
     public function __toString()
     {

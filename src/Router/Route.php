@@ -1,5 +1,7 @@
 <?php
 
+namespace FrameworkDevA3\Router;
+
 class Route
 {
     // PROPRIETES
@@ -14,7 +16,7 @@ class Route
         $this->path = trim($path, '/');
         $this->function = $function;
         if ($controllerDirectory !== "") {
-            $controllerDirectory = $controllerDirectory."/";
+            $controllerDirectory = $controllerDirectory . "/";
         }
         $this->controllerDirectory = $controllerDirectory;
     }
@@ -38,7 +40,7 @@ class Route
     {
         if (is_string($this->function)) {
             $params = explode('#', $this->function);
-            $controller = $this->controllerDirectory.$params[0]."Controller.php";
+            $controller = $this->controllerDirectory . $params[0] . "Controller.php";
             $controller = new $controller();
             return call_user_func_array($controller, $this->matches);
         } else {
