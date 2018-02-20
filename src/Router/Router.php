@@ -2,6 +2,8 @@
 
 namespace FrameworkDevA3\Router;
 
+use FrameworkDevA3\Router\Route;
+
 class Router
 {
 
