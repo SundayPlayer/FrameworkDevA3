@@ -6,7 +6,7 @@
  * Time: 16:19
  */
 
-require_once ('../Router_Exception.php');
+require_once( '../Router_Exception.php' );
 function test($a) {
 	if ($a>2){
 		throw new Router_Exception("router exception");

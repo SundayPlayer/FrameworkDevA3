@@ -6,7 +6,7 @@
  * Time: 16:06
  */
 
-require_once ('Custom_Exceptions.php');
+require_once( 'Custom_Exceptions.php' );
 class Router_Exception extends Custom_Exceptions {
 	public function __toString(){
 		return "Le router ne parvient pas à trouver la page; ".$this->traceDescription();
