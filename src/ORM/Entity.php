@@ -2,8 +2,12 @@
 
 namespace FrameworkDevA3\ORM;
 
+use FrameworkDevA3\ORM\Traits\EntityTrait;
+
 class Entity
 {
+    use EntityTrait;
+
     private $data;
 
     /**
