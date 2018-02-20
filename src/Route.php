@@ -13,18 +13,19 @@ class Route
     {
         $this->path = trim($path, '/');
         $this->function = $function;
-        if($controllerDirectory !== ""){
+        if ($controllerDirectory !== "") {
             $controllerDirectory = $controllerDirectory."/";
         }
         $this->controllerDirectory = $controllerDirectory;
     }
 
     // FONCTIONS
-    public function match($url){
+    public function match($url)
+    {
         $url = trim($url, '/'); // suppression du / de fin
         $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
         $regex = "#^$path$#i";
-        if(!preg_match($regex, $url, $matches)){
+        if (!preg_match($regex, $url, $matches)) {
             return false;
         } else {
             array_shift($matches);
@@ -33,8 +34,9 @@ class Route
         }
     }
 
-    public function call(){
-        if(is_string($this->function)){
+    public function call()
+    {
+        if (is_string($this->function)) {
             $params = explode('#', $this->function);
             $controller = $this->controllerDirectory.$params[0]."Controller.php";
             $controller = new $controller();
@@ -43,5 +45,4 @@ class Route
             return call_user_func_array($this->function, $this->matches);
         }
     }
-
 }
