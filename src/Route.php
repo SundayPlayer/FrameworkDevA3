@@ -3,15 +3,17 @@
 class Route
 {
     // PROPRIETES
+    private $controllerDirectory;
     private $path;
     private $function;
     private $matches = [];
 
     // CONSTRUCTEUR
-    public function __construct($path, $function)
+    public function __construct($path, $function, $controllerDirectory = "")
     {
         $this->path = trim($path, '/');
         $this->function = $function;
+        $this->controllerDirectory = $controllerDirectory;
     }
 
     // FONCTIONS
@@ -31,8 +33,7 @@ class Route
     public function call(){
         if(is_string($this->function)){
             $params = explode('#', $this->function);
-            $controller = $params[0]."Controller.php";
-            echo $controller;
+            $controller = $this->controllerDirectory.$params[0]."Controller.php";
             $controller = new $controller();
             return call_user_func_array($controller, $this->matches);
         } else {
