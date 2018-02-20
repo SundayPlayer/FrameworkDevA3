@@ -9,7 +9,7 @@ class Template
     /** @var string template content */
     protected $filecontent;
     /** @var string layout file */
-    public static $layoutfile = __dir__ . '/../default.php';
+    public static $layoutfile = __dir__ . '/Layout/default.php';
     /** @var string contenu */
     protected $data = [];
 
@@ -61,6 +61,9 @@ class Template
 
     public function getValue($key)
     {
+        if (!isset($this->data[$key])) {
+            $this->data[$key] = "";
+        }
         return $this->data[$key];
     }
 }
