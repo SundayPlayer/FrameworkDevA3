@@ -9,7 +9,7 @@ class Template
     /** @var string template content */
     protected $filecontent;
     /** @var string layout file */
-    public static $layoutfile = __dir__ . '/../default.php';
+    public static $layoutfile = __dir__ . '/Layout/default.php';
     /** @var string contenu */
     protected $data = [];
 
