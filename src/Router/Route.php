@@ -1,5 +1,7 @@
 <?php
 
+namespace FrameworkDevA3\Router;
+
 class Route
 {
     // PROPRIETES

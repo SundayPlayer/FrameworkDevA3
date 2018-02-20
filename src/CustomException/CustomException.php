@@ -1,9 +1,9 @@
 <?php
 
-namespace FrameworkDevA3\CustomExceptions;
+namespace FrameworkDevA3\CustomException;
 // appel du namespace log
 
-class CustomExceptions extends \Exception
+class CustomException extends \Exception
 {
     public function __construct($message = "")
     {

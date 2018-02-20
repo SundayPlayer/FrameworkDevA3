@@ -1,6 +1,6 @@
 <?php
 
-include 'Route.php';
+namespace FrameworkDevA3\Router;
 
 class Router
 {
