@@ -1,6 +1,6 @@
 <?php
 
-namespace FrameworkDevA3\Template;
+namespace FrameworkDevA3\Views;
 
 class Template
 {
