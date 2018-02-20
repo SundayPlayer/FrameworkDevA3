@@ -21,4 +21,11 @@ trait TableTrait
 
         return $entities;
     }
+
+    public function __call(string $name, array $arguments)
+    {
+        $data = [];
+        // Split du name à toute les majuscules
+        $arr = preg_split('/(?=[A-Z])/', $name, -1, PREG_SPLIT_NO_EMPTY);
+    }
 }

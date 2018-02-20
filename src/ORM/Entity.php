@@ -8,8 +8,6 @@ use FrameworkDevA3\ORM\Traits\EntityTrait;
 
 class Entity
 {
-    use EntityTrait;
-
     private $data;
 
     /**
@@ -35,9 +33,9 @@ class Entity
         $data = new ArrayIterator($this->data);
 
         $values="";
-        foreach ($data as $key => $value){
+        foreach ($data as $key => $value) {
             $values.=$value;
-            if($data->hasNext()){
+            if ($data->hasNext()) {
                 $values.=", ";
             }
         }
@@ -51,9 +49,9 @@ class Entity
         $data = new ArrayIterator($this->data);
 
         $values="";
-        foreach ($data as $key => $value){
+        foreach ($data as $key => $value) {
             $values.=$key." = ".$value;
-            if($data->hasNext()){
+            if ($data->hasNext()) {
                 $values.=", ";
             }
         }

@@ -37,9 +37,9 @@ trait EntityTrait
         $data = new ArrayIterator($this->data);
 
         $values="";
-        foreach ($data as $key => $value){
+        foreach ($data as $key => $value) {
             $values.=$value;
-            if($data->hasNext()){
+            if ($data->hasNext()) {
                 $values.=", ";
             }
         }
@@ -52,9 +52,9 @@ trait EntityTrait
         $data = new ArrayIterator($this->data);
 
         $values="";
-        foreach ($data as $key => $value){
+        foreach ($data as $key => $value) {
             $values.=$key." = ".$value;
-            if($data->hasNext()){
+            if ($data->hasNext()) {
                 $values.=", ";
             }
         }
