@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David C
- * Date: 19/02/2018
- * Time: 14:25
- */
+
+namespace FrameworkDevA3\Model;
 
 class ModelEntity extends Model
 {
