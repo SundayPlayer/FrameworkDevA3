@@ -12,6 +12,7 @@ class Entity
 
     public function __get($name)
     {
+//        var_dump($name);die;
         return $this->data[$name];
     }
 
@@ -39,7 +40,7 @@ class Entity
     public function save()
     {
         $db = Core::db();
-        if (!empty($this->id)) {
+        if (!isset($this->data['id'])) {
             $data = new \CachingIterator(new ArrayIterator($this->data));
 
             $values = "";
