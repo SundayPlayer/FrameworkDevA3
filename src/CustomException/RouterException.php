@@ -9,8 +9,10 @@ namespace FrameworkDevA3\CustomException;
 
 class RouterException extends CustomException
 {
-    public function __toString()
+    private static $customExceptionMessage="Le router ne parvient pas à trouver la page; ";
+
+    public function __construct($message = "")
     {
-        return "Le router ne parvient pas à trouver la page; ".$this->traceDescription();
+        parent::__construct($message, self::$customExceptionMessage);
     }
 }

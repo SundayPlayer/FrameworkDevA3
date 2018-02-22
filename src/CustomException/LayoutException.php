@@ -9,8 +9,10 @@ namespace FrameworkDevA3\CustomException;
 
 class LayoutException extends CustomException
 {
-    public function __toString()
+    private static $customExceptionMessage="Cette vue n'existe pas; ";
+
+    public function __construct($message = "")
     {
-        return "La vue n'existe pas; ".$this->traceDescription();
+        parent::__construct($message, self::$customExceptionMessage);
     }
 }
