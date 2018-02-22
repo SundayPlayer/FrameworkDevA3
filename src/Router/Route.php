@@ -2,23 +2,21 @@
 
 namespace FrameworkDevA3\Router;
 
+use FrameworkDevA3\Controller;
+
 class Route
 {
     // PROPRIETES
-    private $controllerDirectory;
+    private $controllerDirectory = 'FrameworkDevA3\Controller\\';
     private $path;
     private $function;
     private $matches = [];
 
     // CONSTRUCTEUR
-    public function __construct($path, $function, $controllerDirectory = "")
+    public function __construct($path, $function)
     {
         $this->path = trim($path, '/');
         $this->function = $function;
-        if ($controllerDirectory !== "") {
-            $controllerDirectory = $controllerDirectory . "/";
-        }
-        $this->controllerDirectory = $controllerDirectory;
     }
 
     // FONCTIONS
@@ -38,11 +36,10 @@ class Route
 
     public function call()
     {
-        if (is_string($this->function)) {
-            $params = explode('#', $this->function);
-            $controller = $this->controllerDirectory . $params[0] . "Controller.php";
-            $controller = new $controller();
-            return call_user_func_array($controller, $this->matches);
+        if (is_array($this->function)) {
+            $controller = $this->controllerDirectory . $this->function['controller'];
+            $action =  $this->function['action'];
+            return $controller::$action();
         } else {
             return call_user_func_array($this->function, $this->matches);
         }

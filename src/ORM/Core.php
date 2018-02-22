@@ -27,7 +27,10 @@ class Core
             . ';port=' . $conf['ORM']['database']['port']
             . ';dbname=' . $conf['ORM']['database']['name'],
             $conf['ORM']['database']['username'],
-            $conf['ORM']['database']['password']
+            $conf['ORM']['database']['password'],
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            ]
         );
     }
 }

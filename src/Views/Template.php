@@ -30,7 +30,7 @@ class Template
         if (is_file($layout)) {
             $tmpl = new Template($layout);
         } else {
-            throw new LayoutException;
+            throw new LayoutException('Chemin de la vue chargée: '.$layout.".");
         }
 
         $tmpl->setVars($vars);
