@@ -22,9 +22,9 @@ class Template
     public static function render($view, $vars)
     {
         if ($view != null) {
-            $layout = __dir__ . '/../../app/www/Layout/' . $view;
+            $layout = __dir__ . '/../../app/Layout/' . $view;
         } else {
-            $layout = __dir__ . '/../../app/www/Layout/default.php';
+            $layout = __dir__ . '/../../app/Layout/default.php';
         }
 
         if (is_file($layout)) {
