@@ -19,6 +19,16 @@ class Template
         $this->filepath = $filepath;
     }
 
+    /**
+     * This genereate the html code with elements render from the layout
+     *
+     * @param string $view The path of the layout used.
+     *
+     * @param array $vars The list containing all the element used for render
+     * the html code.
+     *
+     * @return string
+     */
     public static function render($view, $vars)
     {
         if ($view != null) {
@@ -30,7 +40,7 @@ class Template
         if (is_file($layout)) {
             $tmpl = new Template($layout);
         } else {
-            throw new LayoutException;
+            throw new LayoutException('Chemin de la vue chargée: '.$layout.".");
         }
 
         $tmpl->setVars($vars);
@@ -38,6 +48,11 @@ class Template
         return $tmpl->output();
     }
 
+    /**
+     * This write the generated code in a buffer
+     *
+     * @return buffer contents
+     */
     public function output()
     {
         ob_start();
@@ -45,7 +60,14 @@ class Template
         return ob_get_clean();
     }
 
-    /** Datas template */
+    /**
+     * This copy variables from an array and put it in another array used for
+     * replace variable in layout by their value
+     *
+     * @param array $vars List of variable for the layout
+     *
+     * @return array
+     */
     public function setVars($vars)
     {
         foreach ($vars as $k => $v) {
@@ -54,6 +76,12 @@ class Template
         return $this;
     }
 
+    /**
+     * This replace the variable from the layout and return the modified
+     * content
+     *
+     * return string
+     */
     public function getContent()
     {
         $this->filecontent = file_get_contents($this->filepath);
@@ -66,6 +94,13 @@ class Template
         return $content;
     }
 
+    /**
+     * This return the value of the variable name from an array
+     *
+     * @param string $key The variable name
+     *
+     * @return string
+     */
     public function getValue($key)
     {
         if (!isset($this->data[$key])) {
