@@ -10,7 +10,7 @@ class Table
 
     protected $entityName;
 
-    protected $entities = [];
+    public $entities = [];
 
     public function __call(string $name, array $arguments)
     {
