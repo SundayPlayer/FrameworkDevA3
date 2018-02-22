@@ -9,6 +9,6 @@ class PagesController extends MainController
 
     public function home()
     {
-        echo Template::render('Pages/home.php');
+        echo Template::render('Pages/home.php', []);
     }
 }

@@ -2,12 +2,12 @@
 
 namespace FrameworkDevA3\Router;
 
-use FrameworkDevA3\Controller;
+use App\Controller;
 
 class Route
 {
     // PROPRIETES
-    private $controllerDirectory = 'FrameworkDevA3\Controller\\';
+    private $controllerDirectory = 'App\Controller\\';
     private $path;
     private $function;
     private $matches = [];
@@ -38,8 +38,9 @@ class Route
     {
         if (is_array($this->function)) {
             $controller = $this->controllerDirectory . $this->function['controller'];
+            $ctrl = new $controller();
             $action =  $this->function['action'];
-            return $controller::$action();
+            return $ctrl->$action();
         } else {
             return call_user_func_array($this->function, $this->matches);
         }
