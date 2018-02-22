@@ -4,11 +4,18 @@ namespace FrameworkDevA3\CustomException;
 
 // appel du namespace log
 
+use FrameworkDevA3\Log\Log;
+
 class CustomException extends \Exception
 {
-    public function __construct($message = "")
+	private $CustomExceptionMessage = "";
+
+    public function __construct($message = "",$CustomExceptionMessage)
     {
+	    $this->CustomExceptionMessage=$CustomExceptionMessage;
+
         parent::__construct($message);
+        Log::addLog($this->messageFacto(),$this->getLine(),$this->getFile());
     }
 
     public function __toString()
@@ -16,10 +23,13 @@ class CustomException extends \Exception
         return $this->traceDescription();
     }
 
-    //fonction de description de l'erreur + envoie de l'exception au log
+    // factoriser les messages
+	private function messageFacto(){
+    	return $this->CustomExceptionMessage.$this->message;
+	}
+    //fonction de description de l'erreur
     protected function traceDescription()
     {
-        //sendLog($this->getTrace());
-        return $this->message."<br>"."Dans le fichier: \"".$this->getFile()."\"<br> A la ligne: ".$this->getLine();
+        return $this->messageFacto()."<br>"."Dans le fichier: \"".$this->getFile()."\"<br> A la ligne: ".$this->getLine();
     }
 }
