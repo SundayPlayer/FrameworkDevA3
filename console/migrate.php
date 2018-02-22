@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 
 $className = '';
 
-foreach (glob("../db/migrations/*.php") as $filename) {
+foreach (glob(__DIR__."/../../app/Migrations/*.php") as $filename) {
     require_once $filename;
 
     $arr = preg_split('/_/', basename($filename, '.php'), -1, PREG_SPLIT_NO_EMPTY);
