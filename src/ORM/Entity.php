@@ -6,7 +6,7 @@ use ArrayIterator;
 
 class Entity
 {
-    private $data;
+    protected $data;
 
     /**
      * @return mixed
