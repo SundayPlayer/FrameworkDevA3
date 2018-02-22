@@ -1,10 +1,10 @@
 <?php
-
+require_once '../vendor/autoload.php';
 ini_set('display_errors', 1);
 
 $className = '';
 
-foreach (glob(__DIR__."/../../app/Migrations/*.php") as $filename) {
+foreach (glob(__DIR__."/../app/Db/migrations/*.php") as $filename) {
     require_once $filename;
 
     $arr = preg_split('/_/', basename($filename, '.php'), -1, PREG_SPLIT_NO_EMPTY);
