@@ -2,7 +2,6 @@
 
 namespace FrameworkDevA3\Migration;
 
-require_once dirname(__FILE__).'../../ORM/Core.php';
 use FrameworkDevA3\ORM\Core;
 
 class BaseMigration
@@ -12,7 +11,8 @@ class BaseMigration
 
     public $path = '';
 
-    public function table(string $tableName, string $engine = 'innoDB') {
+    public function table(string $tableName, string $engine = 'innoDB')
+    {
         $this->table['table_name'] = $tableName;
         $this->table['engine'] = $engine;
 
@@ -24,7 +24,8 @@ class BaseMigration
         return $this;
     }
 
-    public function addColumn(string $columnName, string $type,  string $param = 'NOT NULL') {
+    public function addColumn(string $columnName, string $type, string $param = 'NOT NULL')
+    {
 
         $validType = '';
 
@@ -55,11 +56,13 @@ class BaseMigration
         return $this;
     }
 
-    public function addPrimaryKeys(array $keys) {
+    public function addPrimaryKeys(array $keys)
+    {
         $this->table['primaryKeys'] = $keys;
     }
 
-    public function create() {
+    public function create()
+    {
         $this->sql .= "CREATE TABLE IF NOT EXISTS `{$this->table['table_name']}` (";
 
         foreach ($this->table['columns'] as $column) {
@@ -85,7 +88,8 @@ class BaseMigration
         $this->exec();
     }
 
-    public function exec() {
+    public function exec()
+    {
         $db = Core::db();
 
         if ($this->hasTable('_migrations')) {
@@ -117,7 +121,8 @@ class BaseMigration
         }
     }
 
-    public function hasTable(string $tableName) {
+    public function hasTable(string $tableName)
+    {
         $db = Core::db();
         $sth = $db->prepare(
             "SELECT *
@@ -134,19 +139,21 @@ class BaseMigration
         }
     }
 
-    public function getDump() {
+    public function getDump()
+    {
         return $this->table;
     }
 
-    public function getSql() {
+    public function getSql()
+    {
         return $this->sql;
     }
 
-    public function dd($fuck) {
+    public function dd($fuck)
+    {
         echo '<pre>';
         var_dump($fuck);
         echo '</pre>';
         // exit;
     }
-
 }
