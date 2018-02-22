@@ -31,6 +31,7 @@ class CustomException extends \Exception
     //fonction de description de l'erreur
     protected function traceDescription()
     {
-        return $this->messageFacto()."<br>"."Dans le fichier: \"".$this->getFile()."\"<br> A la ligne: ".$this->getLine();
+        return $this->messageFacto()."<br>"."Dans le fichier: \"".$this->getFile()
+               ."\"<br> A la ligne: ".$this->getLine();
     }
 }
