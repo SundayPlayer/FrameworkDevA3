@@ -2,14 +2,14 @@
 
 namespace FrameworkDevA3\Views;
 
+use FrameworkDevA3\CustomException\LayoutException;
+
 class Template
 {
     /** @var string template path */
     protected $filepath;
     /** @var string template content */
     protected $filecontent;
-    /** @var string layout file */
-    public static $layoutfile = __dir__ . '/Layout/default.php';
     /** @var string contenu */
     protected $data = [];
 
@@ -19,13 +19,20 @@ class Template
         $this->filepath = $filepath;
     }
 
-    public static function render($vars = [], $view = null)
+    public static function render($view, $vars)
     {
         if ($view != null) {
-            $tmpl = new Template($view);
+            $layout = __dir__ . '/../../app/www/Layout/' . $view;
         } else {
-            $tmpl = new Template(template::$layoutfile);
+            $layout = __dir__ . '/../../app/www/Layout/default.php';
         }
+
+        if (is_file($layout)) {
+            $tmpl = new Template($layout);
+        } else {
+            throw new LayoutException;
+        }
+
         $tmpl->setVars($vars);
 
         return $tmpl->output();
