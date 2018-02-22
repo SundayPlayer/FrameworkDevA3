@@ -11,10 +11,12 @@ class Route
     private $path;
     private $function;
     private $matches = [];
+    private $data;
 
     // CONSTRUCTEUR
-    public function __construct($path, $function)
+    public function __construct($path, $function, $data)
     {
+        $this->data = $data;
         $this->path = trim($path, '/');
         $this->function = $function;
     }
@@ -40,7 +42,11 @@ class Route
             $controller = $this->controllerDirectory . $this->function['controller'];
             $ctrl = new $controller();
             $action =  $this->function['action'];
-            return $ctrl->$action();
+            if($this->data !== ""){
+                return call_user_func_array($ctrl->$action, $this->data);
+            } else {
+                return call_user_func_array($ctrl->$action, $this->matches);
+            }
         } else {
             return call_user_func_array($this->function, $this->matches);
         }
