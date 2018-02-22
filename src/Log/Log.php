@@ -4,7 +4,7 @@ namespace FrameworkDevA3\Log;
 
 class Log
 {
-    private static $file = "../LogFiles/fichier.log";
+    private static $file = __DIR__."/../../LogFiles/fichier.log";
 
 
     private function __construct()
