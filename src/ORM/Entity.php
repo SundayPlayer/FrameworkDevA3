@@ -6,7 +6,7 @@ use ArrayIterator;
 
 class Entity
 {
-    private $data;
+    protected $data;
 
     /**
      * @return mixed
@@ -30,49 +30,48 @@ class Entity
      */
     public function save()
     {
-        $bool = false;
+        $db = Core::db();
         if (!isset($this->id)) {
-            $db = Core::db();
-            $data = new ArrayIterator($this->data);
+            $data = new \CachingIterator(new ArrayIterator($this->data));
 
             $values = "";
+            $column = "";
             foreach ($data as $key => $value) {
+                if (gettype($value) == 'string') {
+                    $value = "'" . $value . "'";
+                }
                 $values .= $value;
+                $column .= $key;
                 if ($data->hasNext()) {
                     $values .= ", ";
+                    $column .= ", ";
                 }
             }
-            $query = $db->query("INSERT INTO " . $this->name . " VALUES (" . $values . ")");
-            if ($query->fetch()) {
-                $bool = true;
-            }
+            $query = $db->query("INSERT INTO " . $this->tableName . ' (' . $column . ") VALUES (" . $values . ");");
+            return $query->execute();
         } else {
-            $db = Core::db();
-            $data = new ArrayIterator($this->data);
+            $data = new \CachingIterator(new ArrayIterator($this->data));
 
             $values = "";
             foreach ($data as $key => $value) {
+                if (gettype($value) == 'string') {
+                    $value = "'" . $value . "'";
+                }
                 $values .= $key . " = " . $value;
                 if ($data->hasNext()) {
                     $values .= ", ";
                 }
             }
-            $query = $db->query("UPDATE " . $this->name . "SET " . $data . " WHERE id=" . $this->id);
-            if ($query->fetch()) {
-                $bool = true;
-            }
+            echo "UPDATE " . $this->tableName . "SET " . $values . " WHERE id=" . $this->id . ";";
+            $query = $db->query("UPDATE " . $this->tableName . " SET " . $values . " WHERE id=" . $this->id . ";");
+            return $query->execute();
         }
-        return $bool;
     }
 
     public function delete()
     {
         $db = Core::db();
-        $query = $db->query("DELETE FROM " . $this->name . " WHERE id=" . $this->id);
-        if ($query->fetch()) {
-            return true;
-        } else {
-            return false;
-        }
+        $query = $db->query("DELETE FROM " . $this->tableName . " WHERE id=" . $this->id . ";");
+        return $query->execute();
     }
 }
