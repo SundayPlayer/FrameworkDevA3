@@ -24,9 +24,13 @@ class Entity
         $this->data = $data;
     }
 
-
+    /**
+     *
+     *
+     */
     public function save()
     {
+        $bool = false;
         if (!isset($this->id)) {
             $db = Core::db();
             $data = new ArrayIterator($this->data);
@@ -39,7 +43,9 @@ class Entity
                 }
             }
             $query = $db->query("INSERT INTO " . $this->name . " VALUES (" . $values . ")");
-            $query->fetch();
+            if ($query->fetch()) {
+                $bool = true;
+            }
         } else {
             $db = Core::db();
             $data = new ArrayIterator($this->data);
@@ -52,14 +58,21 @@ class Entity
                 }
             }
             $query = $db->query("UPDATE " . $this->name . "SET " . $data . " WHERE id=" . $this->id);
-            $query->fetch();
+            if ($query->fetch()) {
+                $bool = true;
+            }
         }
+        return $bool;
     }
 
     public function delete()
     {
         $db = Core::db();
         $query = $db->query("DELETE FROM " . $this->name . " WHERE id=" . $this->id);
-        $query->fetch();
+        if ($query->fetch()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

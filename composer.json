@@ -7,7 +7,8 @@
   },
   "autoload": {
     "psr-4": {
-      "FrameworkDevA3\\": "src/"
+      "FrameworkDevA3\\": "src/",
+      "App\\": "app/"
     }
   },
   "license": "MIT",

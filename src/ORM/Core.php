@@ -20,14 +20,17 @@ class Core
 
     private function __construct()
     {
-        $conf = include __DIR__ . '../../app/config.php';
+        $conf = require __DIR__ . '/../../app/config.php';
 
         $this->db = new PDO(
             'mysql:host=' . $conf['ORM']['database']['host']
             . ';port=' . $conf['ORM']['database']['port']
             . ';dbname=' . $conf['ORM']['database']['name'],
             $conf['ORM']['database']['username'],
-            $conf['ORM']['database']['password']
+            $conf['ORM']['database']['password'],
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            ]
         );
     }
 }
