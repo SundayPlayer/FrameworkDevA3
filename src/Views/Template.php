@@ -19,7 +19,7 @@ class Template
         $this->filepath = $filepath;
     }
 
-    public static function render($vars = [], $view = null)
+    public static function render($view, $vars)
     {
         if ($view != null) {
             $layout = __dir__ . '/../../app/www/Layout/' . $view;
