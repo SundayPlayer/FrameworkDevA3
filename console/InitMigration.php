@@ -1,8 +1,8 @@
 <?php
 
-require_once '../../src/ORM/Core.php';
+use FrameworkDevA3\ORM\Core;
 
-$db = FrameworkDevA3\ORM\Core::db();
+$db = Core::db();
 
 $db->query("
     CREATE TABLE IF NOT EXISTS `_migrations` (
