@@ -8,20 +8,29 @@ class Entity
 {
     protected $data;
 
-    /**
-     * @return mixed
-     */
-    public function getData()
+    protected $tableName;
+
+    public function __get($name)
     {
-        return $this->data;
+//        var_dump($name);die;
+        return $this->data[$name];
+    }
+
+    public function __set($name, $value)
+    {
+        $this->data[$name] = $value;
     }
 
     /**
-     * @param mixed $data
+     * @return mixed
      */
-    public function setData($data)
+    public function values($data = null)
     {
-        $this->data = $data;
+        if (is_null($data)) {
+            return $this->data;
+        } else {
+            $this->data = $data;
+        }
     }
 
     /**
@@ -31,7 +40,7 @@ class Entity
     public function save()
     {
         $db = Core::db();
-        if (!isset($this->id)) {
+        if (!isset($this->data['id'])) {
             $data = new \CachingIterator(new ArrayIterator($this->data));
 
             $values = "";
@@ -62,7 +71,7 @@ class Entity
                     $values .= ", ";
                 }
             }
-            echo "UPDATE " . $this->tableName . "SET " . $values . " WHERE id=" . $this->id . ";";
+            echo "UPDATE " . $this->tableName . " SET " . $values . " WHERE id=" . $this->id . ";";
             $query = $db->query("UPDATE " . $this->tableName . " SET " . $values . " WHERE id=" . $this->id . ";");
             return $query->execute();
         }
