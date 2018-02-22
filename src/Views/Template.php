@@ -56,6 +56,7 @@ class Template
     public function output()
     {
         ob_start();
+        extract($this->data);
         eval('?>' . $this->getContent());
         return ob_get_clean();
     }
