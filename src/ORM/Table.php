@@ -12,6 +12,11 @@ class Table
 
     public $entities = [];
 
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @return $this
+     */
     public function __call(string $name, array $arguments)
     {
         $db = Core::db();
