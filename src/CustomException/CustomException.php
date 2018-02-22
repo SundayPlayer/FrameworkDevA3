@@ -8,14 +8,14 @@ use FrameworkDevA3\Log\Log;
 
 class CustomException extends \Exception
 {
-	private $CustomExceptionMessage = "";
+    private $CustomExceptionMessage = "";
 
-    public function __construct($message = "",$CustomExceptionMessage)
+    public function __construct($CustomExceptionMessage, $message = "")
     {
-	    $this->CustomExceptionMessage=$CustomExceptionMessage;
+        $this->CustomExceptionMessage=$CustomExceptionMessage;
 
         parent::__construct($message);
-        Log::addLog($this->messageFacto(),$this->getLine(),$this->getFile());
+        Log::addLog($this->messageFacto(), $this->getLine(), $this->getFile());
     }
 
     public function __toString()
@@ -24,9 +24,10 @@ class CustomException extends \Exception
     }
 
     // factoriser les messages
-	private function messageFacto(){
-    	return $this->CustomExceptionMessage.$this->message;
-	}
+    private function messageFacto()
+    {
+        return $this->CustomExceptionMessage.$this->message;
+    }
     //fonction de description de l'erreur
     protected function traceDescription()
     {
