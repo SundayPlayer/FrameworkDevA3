@@ -28,6 +28,13 @@ class Router
         return $route;
     }
 
+    public function post($path, $function, $params="")
+    {
+        $route = new Route($path, $function,  $params="");
+        $this->routes["POST"][] = $route;
+        return $route;
+    }
+
     public function run()
     {
         if (!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
