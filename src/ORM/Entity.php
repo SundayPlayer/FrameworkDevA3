@@ -34,7 +34,6 @@ class Entity
         if (!isset($this->id)) {
             $db = Core::db();
             $data = new ArrayIterator($this->data);
-
             $values = "";
             foreach ($data as $key => $value) {
                 $values .= $value;
