@@ -2,7 +2,6 @@
 
 namespace FrameworkDevA3\Migration;
 
-require_once dirname(__FILE__).'../../ORM/Core.php';
 use FrameworkDevA3\ORM\Core;
 
 class BaseMigration
@@ -12,8 +11,9 @@ class BaseMigration
 
     public $path = '';
 
-    public function table(string $tableName, string $engine = 'innoDB') {
-        $this->table['table_name'] = $tableName;
+    public function table(string $tableName, string $engine = 'innoDB')
+    {
+        $this->table['tableName'] = $tableName;
         $this->table['engine'] = $engine;
 
         $this->addColumn('id', 'integer', 'NOT NULL AUTO_INCREMENT')
@@ -24,8 +24,8 @@ class BaseMigration
         return $this;
     }
 
-    public function addColumn(string $columnName, string $type,  string $param = 'NOT NULL') {
-
+    public function addColumn(string $columnName, string $type, string $param = 'NOT NULL')
+    {
         $validType = '';
 
         switch ($type) {
@@ -55,12 +55,26 @@ class BaseMigration
         return $this;
     }
 
-    public function addPrimaryKeys(array $keys) {
+    public function addPrimaryKeys(array $keys)
+    {
         $this->table['primaryKeys'] = $keys;
     }
 
-    public function create() {
-        $this->sql .= "CREATE TABLE IF NOT EXISTS `{$this->table['table_name']}` (";
+    public function addForeignKey(string $column, string $referencedTable, string $referencedColumn, array $action = [])
+    {
+        $this->table['foreignKeys'][] = [
+            'column' => $column,
+            'referencedTable' => $referencedTable,
+            'referencedColumn' => $referencedColumn,
+            'action' => $action
+        ];
+
+        return $this;
+    }
+
+    public function create()
+    {
+        $this->sql .= "CREATE TABLE IF NOT EXISTS `{$this->table['tableName']}` (";
 
         foreach ($this->table['columns'] as $column) {
             $this->sql .= " `{$column['column_name']}` {$column['type']} {$column['param']}, ";
@@ -80,18 +94,36 @@ class BaseMigration
             $this->sql = substr_replace($this->sql, '', -2, 2);
         }
 
-        $this->sql .= ") ENGINE = {$this->table['engine']}; ";
+        if (isset($this->table['foreignKeys'])) {
+            foreach ($this->table['foreignKeys'] as $foreignKey) {
+                $this->sql .= ", INDEX `fk_{$this->table['tableName']}_{$foreignKey['referencedTable']}_idx` (`{$foreignKey['column']}` ASC), ";
+                $this->sql .= "CONSTRAINT `fk_{$this->table['tableName']}_{$foreignKey['referencedTable']}`";
+                $this->sql .= " FOREIGN KEY (`{$foreignKey['column']}`)";
+                $this->sql .= " REFERENCES `{$foreignKey['referencedTable']}` (`{$foreignKey['referencedColumn']}`)";
+                if (isset($foreignKey['action'])) {
+                    $this->sql .= " ON DELETE {$foreignKey['action']['delete']}";
+                    $this->sql .= " ON UPDATE {$foreignKey['action']['update']}";
+                } else {
+                    $this->sql .= " ON DELETE NO ACTION";
+                    $this->sql .= " ON UPDATE NO ACTION";
+                }
+            }
+        }
 
-        $this->exec();
+        $this->sql .= ") ENGINE = {$this->table['engine']}; ";
+        unset($this->table);
+
+        return $this;
     }
 
-    public function exec() {
+    public function exec()
+    {
         $db = Core::db();
 
         if ($this->hasTable('_migrations')) {
             $sth = $db->prepare("
                 SELECT *
-                FROM migrations
+                FROM _migrations
                 WHERE migration_name = :filename
             ");
             $sth->execute([
@@ -102,7 +134,7 @@ class BaseMigration
             if (!$isMigrated) {
                 $db->query($this->sql);
                 $sth = $db->prepare("
-                  INSERT INTO migrations (migration_name)
+                  INSERT INTO _migrations (migration_name)
                   VALUES (:filename)
                 ");
                 $sth->execute([
@@ -117,7 +149,8 @@ class BaseMigration
         }
     }
 
-    public function hasTable(string $tableName) {
+    public function hasTable(string $tableName)
+    {
         $db = Core::db();
         $sth = $db->prepare(
             "SELECT *
@@ -134,19 +167,21 @@ class BaseMigration
         }
     }
 
-    public function getDump() {
+    public function getDump()
+    {
         return $this->table;
     }
 
-    public function getSql() {
+    public function getSql()
+    {
         return $this->sql;
     }
 
-    public function dd($fuck) {
+    public function dd($fuck)
+    {
         echo '<pre>';
         var_dump($fuck);
         echo '</pre>';
         // exit;
     }
-
 }

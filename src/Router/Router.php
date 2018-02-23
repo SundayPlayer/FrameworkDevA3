@@ -21,10 +21,17 @@ class Router
 
     // Permet l'ajout d'une route basique, à partir d'un URL et d'une fonction ou d'un controller à appeler.
     // Retourne la route prête.
-    public function get($path, $function)
+    public function get($path, $function, $optionals="")
     {
-        $route = new Route($path, $function);
+        $route = new Route($path, $function, $optionals);
         $this->routes["GET"][] = $route;
+        return $route;
+    }
+
+    public function post($path, $function, $params="")
+    {
+        $route = new Route($path, $function, $params="");
+        $this->routes["POST"][] = $route;
         return $route;
     }
 
