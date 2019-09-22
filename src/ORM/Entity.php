@@ -34,8 +34,9 @@ class Entity
     }
 
     /**
-     *
-     *
+     * if the entity exist it's for updating the entity, else it's for create it
+     * @return boolean
+     * true if the SQL query has been executed with success
      */
     public function save()
     {
@@ -77,10 +78,19 @@ class Entity
         }
     }
 
+    /**
+     * @return boolean
+     * true if the SQL query has been executed with success
+     */
     public function delete()
     {
         $db = Core::db();
-        $query = $db->query("DELETE FROM " . $this->tableName . " WHERE id=" . $this->id . ";");
-        return $query->execute();
+
+        if (!empty($this->id)) {
+            $query = $db->query("DELETE FROM " . $this->tableName . " WHERE id=" . $this->id . ";");
+            return $query->execute();
+        } else {
+            return false;
+        }
     }
 }
